@@ -1,0 +1,29 @@
+
+name: Hello World CI Pipeline
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Hello World script
+        run: bash hello.sh
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Test message
+        run: echo "Test successful"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Deploy message
+        run: echo "Deploy successful"
